@@ -1,0 +1,22 @@
+.form-wrapper{
+    padding: 40px;
+    border: 2px solid grey;
+    width: 500px;
+    margin: auto;
+    .title{
+      border-bottom: 1px solid grey;  
+      margin: 0;
+      padding-bottom: 20px;
+    }
+    .action-btns{
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        .already-registered{
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+    }
+}

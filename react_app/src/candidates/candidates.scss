@@ -1,0 +1,15 @@
+$gray-color: gray;
+ul.container, .container{
+     margin: 0 20%;
+     border: 1px solid $gray-color;
+     background-color: #bbdefb33;
+     .other-details{
+          padding: 10px;
+          color: $gray-color;
+          text-align: right;
+     }
+     .job-description{
+          padding: 40px;
+          border-top: 1px solid;
+     }
+}
