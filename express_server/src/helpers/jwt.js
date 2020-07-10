@@ -19,9 +19,7 @@ function getTokenFromHeader(req){
 }
   
 function sign(user) {
-  return jsonwebtoken.sign(user, secret, {
-    expiresIn: '24h'
-  });
+  return jsonwebtoken.sign(user, secret);
 }
 
 module.exports = {
