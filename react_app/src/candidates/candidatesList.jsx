@@ -16,7 +16,7 @@ function CandidatesList(props) {
     CandidateHttp.all().then(data => {
       setData(data.candidates);
     }).catch(err => {
-      if (err.response.status === 401) {
+      if (err.response && err.response.status === 401) {
         props.history.push('/login');
       }
     });

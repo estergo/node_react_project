@@ -8,10 +8,12 @@ exports.signup = function (req, res) {
     if (!newUser.username || !newUser.password || !newUser.email) {
         handleError(res, 'User and Password are requred fields');
     }
-    newUser.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8));
-    createUser(newUser).then(() => {
-        findUserByUsername(newUser.username).then(user => handleSuccess(res, user));
-    }).catch(err => handleError(res, 'Oooops! something is wrong. please verify your username and password and try again.'));
+    else {
+        newUser.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8));
+        createUser(newUser).then(() => {
+            findUserByUsername(newUser.username).then(user => handleSuccess(res, user));
+        }).catch(err => handleError(res, 'Oooops! something is wrong. please verify your username and password and try again.'));
+    }
 }
 
 exports.signin = function (req, res) {
@@ -21,13 +23,20 @@ exports.signin = function (req, res) {
     }
     findUserByUsername(username).then(user => {
         if (!user) handleError(res, 'User not found!');
+        else {
+            const result = bcrypt.compareSync(password, user.password);
+            if (!result) handleError(res, 'Password not valid!');
+            else {
+                handleSuccess(res, user);
+            }
 
-        const result = bcrypt.compareSync(password, user.password);
-        if (!result) handleError(res, 'Password not valid!');
+        }
 
-        handleSuccess(res, user);
 
-    }).catch(err => handleError(res, err));
+    }).catch(err => {
+        console.log('err222222222', err);
+        handleError(res, err);
+    });
 }
 
 
@@ -46,7 +55,10 @@ function createUser(user) {
 function findUserByUsername(username) {
     return new Promise((resolve, reject) => {
         db.get(`SELECT * FROM user WHERE username = ?`, [username], (err, user) => {
-            if (err) reject(err);
+            if (err) {
+                console.log('errrrrrr', err);
+                reject(err);
+            }
             resolve(user);
         });
     });
@@ -56,9 +68,9 @@ function handleSuccess(res, user) {
     const token = jwt.sign(user);
     res.status(200).send({ success: true, token });
 }
-         
-function handleError(res, msg){
-    res.status(403).send({success: false, msg})
+
+function handleError(res, msg) {
+    res.status(403).send({ success: false, msg });
 }
 
 
