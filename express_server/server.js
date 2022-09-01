@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const jwt = require('./src/helpers/jwt').jwt;
 const errorHandler = require('./src/helpers/error-handler');
 const PORT = process.env.PORT || 8080;
+const password = 'Password';
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
