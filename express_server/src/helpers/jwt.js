@@ -12,10 +12,10 @@ function getTokenFromHeader(req){
 
   function jwt (){
     return expressJwt({
-        secret,
-        algorithms: ['HS256'],
-        getToken: getTokenFromHeader
-    }).unless({path: ['/api/auth/signup', '/api/auth/signin']})
+      secret,
+      algorithms: ['HS256'],
+      getToken: getTokenFromHeader
+    }).unless({ path: ['/api/auth/signup', '/api/auth/signin'] });
 }
   
 function sign(user) {

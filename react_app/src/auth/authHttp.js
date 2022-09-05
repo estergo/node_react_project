@@ -12,10 +12,10 @@ const AuthHttp = {
     },
 
     setToken: (token) => {
-        const fullToken = `Bearer ${token}`
+        const fullToken = `Bearer ${token}`;
         Api.defaults.headers.common['Authorization'] = fullToken;
         sessionStorage.setItem('token', fullToken);
     }
-}
+};
 
 export default AuthHttp;
