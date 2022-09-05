@@ -17,6 +17,7 @@
     "express-jwt": "^6.0.0",
     "http-status-codes": "^1.4.0",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.25",
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
