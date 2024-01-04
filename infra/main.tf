@@ -1,6 +1,6 @@
 provider "aws" {
-    region = "us-east-1"
-    profile = "dev3"
+  region  = "us-east-1"
+  profile = "dev3"
 }
 
 locals {
@@ -20,7 +20,7 @@ resource "aws_s3_bucket" "data" {
   tags = merge({
     Name        = "${local.resource_prefix.value}-data-ester-dev"
     Environment = local.resource_prefix.value
-  }, {
+    }, {
     git_commit           = "7f61b61d-920c-4b74-a81c-d45540873ec7"
     git_file             = "terraform/aws/s3.tf"
     git_last_modified_at = "2020-06-16 14:46:24"
@@ -29,12 +29,17 @@ resource "aws_s3_bucket" "data" {
     git_org              = "bridgecrewio"
     git_repo             = "terragoat"
     yor_trace            = "48666bb2-3c3c-45ff-b0df-63bcf2afd22b"
+    }, {
+    owner = "guy"
   })
 }
 
 
 resource "aws_s3_bucket" "data_log_bucket" {
   bucket = "data-log-bucket"
+  tags = {
+    owner = "guy"
+  }
 }
 
 
@@ -43,7 +48,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "data_log_bucket" 
 
   rule {
     apply_server_side_encryption_by_default {
-      sse_algorithm     = "aws:kms"
+      sse_algorithm = "aws:kms"
     }
   }
 }
